@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Unit</string>
+    <string name="start_button">Iniciar</string>
+    <string name="instructions">Instruções</string>
+    <string name="exit_button">Sair</string>
+    <string name="title_activity_instructions">Instruções</string>
+    <string name="instructions_note">Tela de instruções</string>
+    <string name="clear_button">Cancelar</string>
+    <string name="next_question_button">Próxima questão</string>
+    <string name="timer">Tempo restante: </string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="title_activity_word_quiz">WordQuiz</string>
+
+    <string name="right_questions">Você acertou %d perguntas</string>
+    <string name="quiz_time">Tempo do quiz: %s</string>
+    <string name="title_activity_result">Resultado</string>
+    <string name="title_activity_wrong_answers">Questões que você errou</string>
+
+    <string name="score">Seu placar é %d pontos</string>
+    <string name="question_title_placeholder">Question title placeholder</string>
+    <string name="alternative">Alternative placeholder</string>
+    <string name="quiz_counter">1/10</string>
+</resources>

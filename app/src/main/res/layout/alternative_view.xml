@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/btn_minus"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_minus" />
+
+    <ImageView
+        android:id="@+id/btn_plus"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="1dp"
+        android:layout_toEndOf="@+id/increment_txt"
+        android:layout_toRightOf="@+id/increment_txt"
+        android:src="@drawable/ic_plus" />
+
+    <TextView
+        android:id="@+id/increment_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:gravity="center"
+        android:layout_marginRight="7dp"
+        android:layout_toEndOf="@+id/btn_minus"
+        android:layout_toRightOf="@+id/btn_minus"
+        android:text="0"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/alternative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="7dp"
+        android:layout_toEndOf="@+id/btn_plus"
+        android:layout_toRightOf="@+id/btn_plus"
+        android:text="@string/alternative" />
+</RelativeLayout>
