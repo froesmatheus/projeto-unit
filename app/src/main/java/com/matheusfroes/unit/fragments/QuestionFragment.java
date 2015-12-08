@@ -3,6 +3,7 @@ package com.matheusfroes.unit.fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.matheusfroes.unit.R;
 import com.matheusfroes.unit.activities.ResultActivity;
 import com.matheusfroes.unit.adapters.AlternativeAdapter;
 import com.matheusfroes.unit.db.QuestionDAO;
+import com.matheusfroes.unit.model.Alternative;
 import com.matheusfroes.unit.model.Question;
 import com.matheusfroes.unit.model.WrongQuestion;
 
@@ -21,17 +23,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionFragment extends Fragment {
+    public static List<WrongQuestion> wrongQuestionList;
+    public static List<Pair<String, Integer>> rightAlternatives;
     private Question question;
     private TextView questionTitle;
     private TextView quizCounter;
     private QuestionDAO dao;
     private List<Question> questionList = new ArrayList<>();
-    List<String> currentAlternatives = new ArrayList<>();
+    private List<Alternative> currentAlternatives = new ArrayList<>();
     private AlternativeAdapter adapter;
     private int index = 0;
     private int questionNumber = 1;
     private int score = 0;
-    public static List<WrongQuestion> wrongQuestionList;
 
     public QuestionFragment() {
         super();
@@ -52,6 +55,7 @@ public class QuestionFragment extends Fragment {
 
         adapter = new AlternativeAdapter(getActivity(), currentAlternatives);
         wrongQuestionList = new ArrayList<>();
+        rightAlternatives = new ArrayList<>();
 
         alternatives.setAdapter(adapter);
 
@@ -66,11 +70,11 @@ public class QuestionFragment extends Fragment {
     public void setQuestion(Question question) {
         currentAlternatives.clear();
         this.questionTitle.setText(question.getQuestionTitle());
-        currentAlternatives.add(question.getA());
-        currentAlternatives.add(question.getB());
-        currentAlternatives.add(question.getC());
-        currentAlternatives.add(question.getD());
-        currentAlternatives.add(question.getE());
+        currentAlternatives.add(new Alternative(question.getA()));
+        currentAlternatives.add(new Alternative(question.getB()));
+        currentAlternatives.add(new Alternative(question.getC()));
+        currentAlternatives.add(new Alternative(question.getD()));
+        currentAlternatives.add(new Alternative(question.getE()));
         adapter.notifyDataSetChanged();
         adapter.clearPoints();
         TimerFragment.remainingPoints.setText("Pontos restantes: 4");
@@ -87,14 +91,6 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-    public void sendResult() {
-        TimerFragment.countDownTimer.cancel();
-        Intent intent = new Intent(getActivity(), ResultActivity.class);
-        intent.putExtra("score", score);
-        getActivity().finish();
-        startActivity(intent);
-    }
-
     public void sendResult(String finishedTime) {
         TimerFragment.countDownTimer.cancel();
         Intent intent = new Intent(getActivity(), ResultActivity.class);
@@ -106,45 +102,32 @@ public class QuestionFragment extends Fragment {
 
     public boolean checkAnswer() {
         if (AlternativeAdapter.points != 4) {
-            Toast.makeText(getActivity(), "Você precisa distribuir todos os pontos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.alert_distribute_points, Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        List<Alternative> alternativesList = adapter.getAlternativesList();
+        List<Alternative> betAlternatives = new ArrayList<>();
+
+        int rightAlternativePosition = question.getRightAnswerPosition();
+        Alternative rightAlternative = alternativesList.get(rightAlternativePosition);
+
+        for (Alternative alternative : alternativesList) {
+            if (alternative.getBetPoints() > 0) {
+                betAlternatives.add(alternative);
+            }
+        }
+
+        if (betAlternatives.contains(rightAlternative)) {
+            score += rightAlternative.getBetPoints();
+            rightAlternatives.add(new Pair<>(question.getQuestionTitle(), rightAlternative.getBetPoints()));
+        }
+
+
         return true;
-
-//        if (radioGroup.getCheckedRadioButtonId() == question.getRightAnswerPosition()) {
-//            score += 10;
-//        } else {
-//            String youChecked = getCheckedAnswer(radioGroup);
-//            wrongQuestionList.add(new WrongQuestion(question.getQuestionTitle(), youChecked, question.getRightAnswer(), question.getExplanation()));
-//        }
     }
-
-//    public String getCheckedAnswer(RadioGroup radioGroup) {
-//        switch (radioGroup.getCheckedRadioButtonId()) {
-//            case R.id.a:
-//                return question.getA();
-//            case R.id.b:
-//                return question.getB();
-//            case R.id.c:
-//                return question.getC();
-//            case R.id.d:
-//                return question.getD();
-//            case R.id.e:
-//                return question.getE();
-//        }
-//
-//        return null;
-//    }
 
     public void updateQuizCounter() {
         this.quizCounter.setText((questionNumber++) + "/" + questionList.size());
     }
-
-//    public void uncheckRadioButtons() {
-//        radioGroup.clearCheck();
-//    }
-//
-//    public RadioGroup getRadioGroup() {
-//        return this.radioGroup;
-//    }
 }

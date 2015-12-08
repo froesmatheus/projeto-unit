@@ -35,9 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.start_button:
-                intent = new Intent(this, QuizActivity.class);
+                intent = new Intent(this, ChooseQuizModeActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.exit_button:
                 this.onBackPressed();

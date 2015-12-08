@@ -1,6 +1,14 @@
 package com.matheusfroes.unit.model;
 
 public class Question {
+    public static final int ALTERNATIVE_A = 0;
+    public static final int ALTERNATIVE_B = 1;
+    public static final int ALTERNATIVE_C = 2;
+    public static final int ALTERNATIVE_D = 3;
+    public static final int ALTERNATIVE_E = 4;
+
+
+
     private int id;
     private String questionTitle;
     private String a;
@@ -38,6 +46,10 @@ public class Question {
         return questionTitle;
     }
 
+    public void setQuestionTitle(String questionTitle) {
+        this.questionTitle = questionTitle;
+    }
+
     public String getA() {
         return a;
     }
@@ -50,32 +62,28 @@ public class Question {
         return b;
     }
 
+    public void setB(String b) {
+        this.b = b;
+    }
+
     public String getC() {
         return c;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public String getE() {
-        return e;
-    }
-
-    public void setQuestionTitle(String questionTitle) {
-        this.questionTitle = questionTitle;
     }
 
     public void setC(String c) {
         this.c = c;
     }
 
+    public String getD() {
+        return d;
+    }
+
     public void setD(String d) {
         this.d = d;
     }
 
-    public void setB(String b) {
-        this.b = b;
+    public String getE() {
+        return e;
     }
 
     public void setE(String e) {

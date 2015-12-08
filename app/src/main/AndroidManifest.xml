@@ -8,39 +8,50 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.matheusfroes.unit.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.matheusfroes.unit.activities.InstructionsActivity"
+            android:name=".activities.InstructionsActivity"
             android:label="@string/instructions"
-            android:parentActivityName="com.matheusfroes.unit.activities.MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.matheusfroes.unit.activities.MainActivity" />
         </activity>
         <activity
-            android:name="com.matheusfroes.unit.activities.QuizActivity"
+            android:name=".activities.QuizActivity"
             android:label="@string/title_activity_word_quiz"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.matheusfroes.unit.activities.ResultActivity"
+            android:name=".activities.ResultActivity"
             android:label="@string/title_activity_result"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.matheusfroes.unit.activities.WrongAnswersActivity"
+            android:name=".activities.WrongAnswersActivity"
             android:label="@string/title_activity_wrong_answers"
-            android:parentActivityName="com.matheusfroes.unit.activities.ResultActivity"
+            android:parentActivityName=".activities.ResultActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.matheusfroes.unit.activities.ResultActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.ChooseQuizModeActivity"
+            android:label="@string/title_activity_quiz_mode"
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.matheusfroes.unit.activities.MainActivity" />
         </activity>
     </application>
 

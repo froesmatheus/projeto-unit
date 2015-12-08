@@ -10,16 +10,17 @@ import com.matheusfroes.unit.model.Question;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.matheusfroes.unit.model.Question.ALTERNATIVE_A;
+import static com.matheusfroes.unit.model.Question.ALTERNATIVE_B;
+import static com.matheusfroes.unit.model.Question.ALTERNATIVE_C;
+import static com.matheusfroes.unit.model.Question.ALTERNATIVE_D;
+import static com.matheusfroes.unit.model.Question.ALTERNATIVE_E;
+
 /**
  * Created by Matheus on 02/10/2015.
  */
 public class DBCore extends SQLiteOpenHelper {
-    private static final String NOME_BANCO = "FACE";
-    private static final int VERSAO_BANCO = 1;
-    private Context context;
-
     public static final String TABELA_PERGUNTAS = "Perguntas";
-
     // Colunas da tabela Perguntas
     public static final String COLUNA_DISCIPLINAS_ID = "_id";
     public static final String COLUNA_ENUNCIADO = "enunciado";
@@ -31,7 +32,8 @@ public class DBCore extends SQLiteOpenHelper {
     public static final String COLUNA_ALTERNATIVA_CORRETA = "alternativa_correta";
     public static final String COLUNA_EXPLICACAO = "explicacao";
     public static final String COLUNA_ALTERNATIVA_CORRETA_ID = "alternativa_correta_id";
-
+    private static final String NOME_BANCO = "FACE";
+    private static final int VERSAO_BANCO = 1;
     private static final String CREATE_TABLE_PERGUNTAS = "CREATE TABLE " + TABELA_PERGUNTAS + "(" +
             COLUNA_DISCIPLINAS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUNA_ENUNCIADO + " TEXT NOT NULL," +
@@ -44,6 +46,7 @@ public class DBCore extends SQLiteOpenHelper {
             COLUNA_EXPLICACAO + " TEXT NOT NULL, " +
             COLUNA_ALTERNATIVA_CORRETA_ID + " INTEGER NOT NULL" +
             ");";
+    private Context context;
 
     public DBCore(Context context) {
         super(context, NOME_BANCO, null, VERSAO_BANCO);
@@ -92,7 +95,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Conjunto de investidores que investem capital em startups",
                 "Prestam serviços à startups selecionadas com ações para desenvolver essas empresas de forma mais rápida.",
                 "As aceleradoras tem um importante papel no desenvolvimento das startups, para consolidação do seu modelo de negócios, ampliação de mercado e promoção do seu crescimento para alcançar nível global.",
-                3));
+                ALTERNATIVE_D));
 
         defaultQuestionList.add(new Question(
                 "O que é pitch?",
@@ -103,7 +106,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "É um lugar onde investidores se reunem para discutir em quais startups eles investirão",
                 "É uma apresentação desenvolvida para mostrar aos potenciais investidores ou clientes o projeto de uma startup, normalmente em um curto espaço de tempo.",
                 "O pitch pode ajudar a startup a ganhar visibilidade, adquirir novos clientes e investidores para seu negócios em uma apresentação rápida com as principais informações sobre sua ideia ou negócio.",
-                0));
+                ALTERNATIVE_A));
 
         defaultQuestionList.add(new Question(
                 "O que é um investidor anjo?",
@@ -114,7 +117,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Responsável por gerir os investimentos vindo de fora na empresa",
                 "Pessoa física que faz investimentos com seu próprio capital em empresas nascentes",
                 "O Investidor-Anjo é normalmente um (ex-)empresário/empreendedor ou executivo que já trilhou uma carreira de sucesso, acumulando recursos suficientes para alocar uma parte (normalmente entre 5% a 10% do seu patrimônio) para investir em novas empresas, bem como aplicar sua experiência apoiando a empresa.",
-                1));
+                ALTERNATIVE_B));
 
         defaultQuestionList.add(new Question(
                 "O que é um MVP?",
@@ -125,7 +128,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Sigla em inglês para Minimum Viable Product - que significa ter um mínimo produto viável para testar",
                 "Sigla em inglês para Minimum Viable Product - que significa ter um mínimo produto viável para testar",
                 "O mínimo produto viável é usado pela startup para testar se a sua solução é bem aceita pelas pessoas, sem necessariamente já ter desenvolvido todas as funcionalidades da sua solução, fazendo com que ela aprenda como desenvolver o seu produto em um tempo menor e com custos menores também.",
-                4));
+                ALTERNATIVE_E));
 
         defaultQuestionList.add(new Question(
                 "O que é um espaço de coworking?",
@@ -136,7 +139,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Um espaço onde investidores se reunem para ajudar financeiramente startups",
                 "Um espaço compartilhado de trabalho, onde várias startups e empreendedores podem trabalhar e dividir a infra-estrutura do local",
                 "Os espaços de coworking costumam ser uma ótima oportunidade para as startups, pois além de poder dividir os custos de um escritório, nesse ambiente os empreendedores tem a oportunidade de compartilhar experiências e aprendizado.",
-                1));
+                ALTERNATIVE_A));
 
         defaultQuestionList.add(new Question(
                 "O que é uma incubadora?",
@@ -147,7 +150,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "É uma empresa que oferece um espaço físico para que uma determinada startup não precise ter custos com aluguel",
                 "É uma entidade que tem por objetivo oferecer suporte a empreendedores para que eles possam desenvolver ideias inovadoras e transformá-las em empreendimentos de sucesso.",
                 "As Incubadoras de empresas são organizações que podem estar vinculadas as instituições de ensino públicas ou privadas, prefeituras, e até mesmo iniciativas empresariais independentes. A base de sustentação de um programa de incubação está alicerçada na difusão da cultura empreendedora, do conhecimento e da inovação.",
-                2));
+                ALTERNATIVE_C));
 
         defaultQuestionList.add(new Question(
                 "O que é um Meetup?",
@@ -158,7 +161,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Local onde diversas startups realizam campeonatos para escolher qual tem a ideia mais criativa",
                 "Encontro para fomentar o networking com a participação de empreendedores, investidores que possam contribuir para o amadurecimento do cenário local.",
                 "O meetup normalmente é organizado por empreendedores que querem trazer para a sua localidade uma discussão rica sobre startups para levar conhecimento e mais preparo para os empreendedores locais e suas startups.",
-                1));
+                ALTERNATIVE_A));
 
         defaultQuestionList.add(new Question(
                 "Qual dessas opções é mais importante para conseguir desenvolver uma startup de sucesso?",
@@ -169,7 +172,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Ter uma boa equipe que tenha uma ótima capacidade de execução, fazendo testes e validações da solução para melhorá-la aos poucos e entregar um produto que tenha boa aceitação no mercado.",
                 "Ter uma boa equipe que tenha uma ótima capacidade de execução, fazendo testes e validações da solução para melhorá-la aos poucos e entregar um produto que tenha boa aceitação no mercado.",
                 "Lembre-se que uma ideia não vale nada se não for tirada do papel. E para conseguir tirá-la do papel é importante ter uma boa equipe e desenvolver uma solução que tenha boa aceitação no mercado.",
-                4));
+                ALTERNATIVE_E));
 
         defaultQuestionList.add(new Question(
                 "Qual das opções abaixo NÃO é uma característica de uma startup?",
@@ -180,7 +183,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "Ter um plano de negócios que sofre muitas mudanças",
                 "Ter um plano de negócios com visão de longo prazo e abrangência local",
                 "As principais características de uma startups é ser muito inovadora, e ter um modelo negócios que seja repetível e escalável, ou seja, possa ser entregue a um grande número de pessoas, onde os custos crescem bem menos que a receita, o que faz com que ela consiga ter um crescimento rápido em um tempo menor que uma empresa tradicional.",
-                1));
+                ALTERNATIVE_B));
 
         defaultQuestionList.add(new Question(
                 "O que é um mentor?",
@@ -191,7 +194,7 @@ public class DBCore extends SQLiteOpenHelper {
                 "É um empreendedor que doa recursos para uma startup sem pedir nada em troca",
                 "São empreendedores de sucesso e outros profissionais do mercado, que tenham experiência e estão dispostos a ajudar outros empreendedores com o intuito de melhorar o desempenho do negócios e evitar erros.",
                 "Os mentores tem um papel muito importante no desenvolvimento das startups, pois o aprendizado a partir da experiência e erros de outras pessoas pode ajudar muito aquele empreendedor que está numa fase inicial do processo, além de fomentar o compartilhamento do conhecimento para potencializar o sucesso de novas startups naquele local.",
-                2));
+                ALTERNATIVE_C));
 
         return defaultQuestionList;
     }

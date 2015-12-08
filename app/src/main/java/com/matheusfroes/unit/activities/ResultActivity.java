@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matheusfroes.unit.R;
+import com.matheusfroes.unit.adapters.RightAlternativeAdapter;
 import com.matheusfroes.unit.fragments.QuestionFragment;
 
 import java.text.NumberFormat;
@@ -36,25 +38,20 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         String timeStr = format.format(Math.abs((time / 60000) % 60)) + ":" + format.format(Math.abs((time / 1000) % 60));
 
         TextView quizTime = (TextView) findViewById(R.id.quiz_time);
-        TextView rightQuestions = (TextView) findViewById(R.id.right_questions);
         TextView scoreTxt = (TextView) findViewById(R.id.score_txt);
+        ListView rightAlternativesLv = (ListView) findViewById(R.id.list);
 
-        quizTime.setText(getResources().getString(R.string.quiz_time, timeStr));
-        rightQuestions.setText(getResources().getString(R.string.right_questions, (score / 10)));
-        scoreTxt.setText(getResources().getString(R.string.score, score));
+        if (QuestionFragment.rightAlternatives.size() != 0) {
+            Toast.makeText(this, "Tem questões certas", Toast.LENGTH_SHORT).show();
+            RightAlternativeAdapter adapter = new RightAlternativeAdapter(this, QuestionFragment.rightAlternatives);
 
-        ImageView resultImage = (ImageView) findViewById(R.id.result_image);
-
-        int ratingImage;
-        if (score < 40) {
-            ratingImage = R.drawable.bad_rating;
-        } else if (score < 80) {
-            ratingImage = R.drawable.average_rating;
-        } else {
-            ratingImage = R.drawable.good_rating;
+            rightAlternativesLv.setAdapter(adapter);
         }
 
-        resultImage.setImageResource(ratingImage);
+
+        quizTime.setText(getResources().getString(R.string.quiz_time, timeStr));
+        scoreTxt.setText(getResources().getString(R.string.score, score));
+
 
         FancyButton playAgainButton = (FancyButton) findViewById(R.id.play_again_button);
         playAgainButton.setOnClickListener(this);

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.matheusfroes.unit.R;
 import com.matheusfroes.unit.fragments.TimerFragment;
+import com.matheusfroes.unit.model.Alternative;
 
 import java.util.List;
 
@@ -17,11 +18,11 @@ import java.util.List;
  * Created by Waldson on 04/12/2015.
  */
 public class AlternativeAdapter extends BaseAdapter {
-    private Context context;
-    private List<String> alternatives;
     public static int points;
+    private Context context;
+    private List<Alternative> alternatives;
 
-    public AlternativeAdapter(Context context, List<String> alternatives) {
+    public AlternativeAdapter(Context context, List<Alternative> alternatives) {
         this.context = context;
         points = 0;
         this.alternatives = alternatives;
@@ -50,10 +51,10 @@ public class AlternativeAdapter extends BaseAdapter {
         ImageView btnPlus = (ImageView) alternativeView.findViewById(R.id.btn_plus);
 
         final TextView incrementer = (TextView) alternativeView.findViewById(R.id.increment_txt);
-        TextView alternative = (TextView) alternativeView.findViewById(R.id.alternative);
+        final TextView alternativeTxt = (TextView) alternativeView.findViewById(R.id.alternative);
 
-        String alternativeStr = alternatives.get(i);
-        alternative.setText(alternativeStr);
+        final Alternative alternative = alternatives.get(i);
+        alternativeTxt.setText(alternative.getAlternative());
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,7 @@ public class AlternativeAdapter extends BaseAdapter {
                 int currentPoints = Integer.valueOf(incrementer.getText().toString());
                 if (currentPoints > 0) {
                     points--;
+                    alternative.decrementBetPoints();
                     TimerFragment.remainingPoints.setText("Pontos restantes: " + (4 - points));
                     incrementer.setText(String.valueOf(currentPoints - 1));
                 }
@@ -74,6 +76,7 @@ public class AlternativeAdapter extends BaseAdapter {
                     points++;
                     TimerFragment.remainingPoints.setText("Pontos restantes: " + (4 - points));
                     int currentPoints = Integer.valueOf(incrementer.getText().toString());
+                    alternative.incrementBetPoints();
                     incrementer.setText(String.valueOf(currentPoints + 1));
                 }
             }
@@ -88,5 +91,9 @@ public class AlternativeAdapter extends BaseAdapter {
 
     public int getPoints() {
         return points;
+    }
+
+    public List<Alternative> getAlternativesList() {
+        return this.alternatives;
     }
 }

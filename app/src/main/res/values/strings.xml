@@ -20,4 +20,6 @@
     <string name="question_title_placeholder">Question title placeholder</string>
     <string name="alternative">Alternative placeholder</string>
     <string name="quiz_counter">1/10</string>
+    <string name="title_activity_quiz_mode">Escolha um modo de jogo</string>
+    <string name="alert_distribute_points">Você precisa distribuir todos os pontos</string>
 </resources>
