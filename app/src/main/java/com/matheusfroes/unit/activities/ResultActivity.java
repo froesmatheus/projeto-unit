@@ -42,7 +42,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         ListView rightAlternativesLv = (ListView) findViewById(R.id.list);
 
         if (QuestionFragment.rightAlternatives.size() != 0) {
-            Toast.makeText(this, "Tem questões certas", Toast.LENGTH_SHORT).show();
             RightAlternativeAdapter adapter = new RightAlternativeAdapter(this, QuestionFragment.rightAlternatives);
 
             rightAlternativesLv.setAdapter(adapter);

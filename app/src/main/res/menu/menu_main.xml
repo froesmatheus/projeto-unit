@@ -4,4 +4,15 @@
     tools:context=".MainActivity">
 
 
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="1"
+        android:title="Sobre"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/config"
+        android:orderInCategory="2"
+        android:title="Configurações"
+        app:showAsAction="never" />
 </menu>

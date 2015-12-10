@@ -9,6 +9,8 @@
         android:id="@+id/btn_minus"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_toEndOf="@+id/alternative_letter"
+        android:layout_toRightOf="@+id/alternative_letter"
         android:src="@drawable/ic_minus" />
 
     <ImageView
@@ -25,13 +27,21 @@
         android:id="@+id/increment_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="7dp"
-        android:gravity="center"
         android:layout_marginRight="7dp"
         android:layout_toEndOf="@+id/btn_minus"
         android:layout_toRightOf="@+id/btn_minus"
-        android:text="0"
-        android:layout_alignParentTop="true" />
+        android:gravity="center"
+        android:text="0" />
+
+
+    <TextView
+        android:id="@+id/alternative_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:text="a. " />
 
     <TextView
         android:id="@+id/alternative"

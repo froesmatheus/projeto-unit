@@ -43,16 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.matheusfroes.unit.activities.ResultActivity" />
         </activity>
-
-        <activity
-            android:name=".activities.ChooseQuizModeActivity"
-            android:label="@string/title_activity_quiz_mode"
-            android:parentActivityName=".activities.MainActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matheusfroes.unit.activities.MainActivity" />
-        </activity>
     </application>
 
 </manifest>

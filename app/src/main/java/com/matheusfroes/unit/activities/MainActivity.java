@@ -4,20 +4,41 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.matheusfroes.unit.R;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private boolean firstTime;
+    private String userName;
+    private SharedPreferences.Editor preferencesEditor;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferencesEditor = getSharedPreferences("Preferences", MODE_PRIVATE).edit();
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+
+        firstTime = preferences.getBoolean("firstTime", true);
+
+        if (firstTime) {
+            showEnterYourNameDialog();
+            firstTime = false;
+            preferencesEditor.putBoolean("firstTime", firstTime);
+            preferencesEditor.apply();
+        }
 
         FancyButton startButton = (FancyButton) findViewById(R.id.start_button);
         FancyButton instructionsButton = (FancyButton) findViewById(R.id.instructions_button);
@@ -35,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.start_button:
-                intent = new Intent(this, ChooseQuizModeActivity.class);
+                intent = new Intent(this, QuizActivity.class);
                 startActivity(intent);
                 break;
             case R.id.exit_button:
@@ -45,6 +66,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, InstructionsActivity.class);
                 startActivity(intent);
         }
+    }
+
+    private void showEnterYourNameDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Qual é o seu nome completo?");
+
+        final EditText nomeEt = new EditText(this);
+
+        builder.setView(nomeEt);
+
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                userName = nomeEt.getText().toString();
+                preferencesEditor.putString("userName", userName);
+                Toast.makeText(MainActivity.this, "Olá, " + userName, Toast.LENGTH_LONG).show();
+            }
+        });
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -69,5 +111,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Dialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 }

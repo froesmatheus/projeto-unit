@@ -21,6 +21,7 @@ public class AlternativeAdapter extends BaseAdapter {
     public static int points;
     private Context context;
     private List<Alternative> alternatives;
+    private String[] alternativeLetters = {"a.", "b.", "c.", "d.", "e."};
 
     public AlternativeAdapter(Context context, List<Alternative> alternatives) {
         this.context = context;
@@ -52,6 +53,9 @@ public class AlternativeAdapter extends BaseAdapter {
 
         final TextView incrementer = (TextView) alternativeView.findViewById(R.id.increment_txt);
         final TextView alternativeTxt = (TextView) alternativeView.findViewById(R.id.alternative);
+        TextView alternativeLetter = (TextView) alternativeView.findViewById(R.id.alternative_letter);
+
+        alternativeLetter.setText(alternativeLetters[i % alternativeLetters.length]);
 
         final Alternative alternative = alternatives.get(i);
         alternativeTxt.setText(alternative.getAlternative());
